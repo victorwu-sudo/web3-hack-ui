@@ -16,160 +16,224 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/chart.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="js/web3.min.js"></script>
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/networkgraph.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
         <script>
             const ERC20TransferABI = [
-                {
-                    "anonymous": false,
-                    "inputs": [
-                        {
-                            "indexed": false,
-                            "internalType": "uint256",
-                            "name": "step",
-                            "type": "uint256"
-                        }
-                    ],
-                    "name": "StepCreated",
-                    "type": "event"
-                },
-                {
-                    "constant": true,
-                    "inputs": [
-                        {
-                            "internalType": "uint256",
-                            "name": "_step",
-                            "type": "uint256"
-                        }
-                    ],
-                    "name": "getprecedents",
-                    "outputs": [
-                        {
-                            "internalType": "uint256[]",
-                            "name": "",
-                            "type": "uint256[]"
-                        }
-                    ],
-                    "payable": false,
-                    "stateMutability": "view",
-                    "type": "function"
-                },
-                {
-                    "constant": true,
-                    "inputs": [
-                        {
-                            "internalType": "uint256",
-                            "name": "_step",
-                            "type": "uint256"
-                        }
-                    ],
-                    "name": "isLastStep",
-                    "outputs": [
-                        {
-                            "internalType": "bool",
-                            "name": "",
-                            "type": "bool"
-                        }
-                    ],
-                    "payable": false,
-                    "stateMutability": "view",
-                    "type": "function"
-                },
-                {
-                    "constant": true,
-                    "inputs": [
-                        {
-                            "internalType": "uint256",
-                            "name": "",
-                            "type": "uint256"
-                        }
-                    ],
-                    "name": "lastSteps",
-                    "outputs": [
-                        {
-                            "internalType": "uint256",
-                            "name": "",
-                            "type": "uint256"
-                        }
-                    ],
-                    "payable": false,
-                    "stateMutability": "view",
-                    "type": "function"
-                },
-                {
-                    "constant": false,
-                    "inputs": [
-                        {
-                            "internalType": "uint256",
-                            "name": "_item",
-                            "type": "uint256"
-                        },
-                        {
-                            "internalType": "uint256[]",
-                            "name": "_precedents",
-                            "type": "uint256[]"
-                        }
-                    ],
-                    "name": "newStep",
-                    "outputs": [
-                        {
-                            "internalType": "uint256",
-                            "name": "",
-                            "type": "uint256"
-                        }
-                    ],
-                    "payable": false,
-                    "stateMutability": "nonpayable",
-                    "type": "function"
-                },
-                {
-                    "constant": true,
-                    "inputs": [
-                        {
-                            "internalType": "uint256",
-                            "name": "",
-                            "type": "uint256"
-                        }
-                    ],
-                    "name": "steps",
-                    "outputs": [
-                        {
-                            "internalType": "address",
-                            "name": "creator",
-                            "type": "address"
-                        },
-                        {
-                            "internalType": "uint256",
-                            "name": "item",
-                            "type": "uint256"
-                        }
-                    ],
-                    "payable": false,
-                    "stateMutability": "view",
-                    "type": "function"
-                },
-                {
-                    "constant": true,
-                    "inputs": [],
-                    "name": "totalSteps",
-                    "outputs": [
-                        {
-                            "internalType": "uint256",
-                            "name": "",
-                            "type": "uint256"
-                        }
-                    ],
-                    "payable": false,
-                    "stateMutability": "view",
-                    "type": "function"
-                }
-            ];
-            const DAI_ADDRESS = "0x5bB8f9d5b88a9194d7f6aF40c7D404c5c6f68471";
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "step",
+									"type": "uint256"
+								}
+							],
+							"name": "StepCreated",
+							"type": "event"
+						},
+						{
+							"constant": true,
+							"inputs": [],
+							"name": "getSupplyChain",
+							"outputs": [
+								{
+									"internalType": "uint256[2][]",
+									"name": "",
+									"type": "uint256[2][]"
+								}
+							],
+							"payable": false,
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"constant": true,
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_step",
+									"type": "uint256"
+								}
+							],
+							"name": "getprecedents",
+							"outputs": [
+								{
+									"internalType": "uint256[]",
+									"name": "",
+									"type": "uint256[]"
+								}
+							],
+							"payable": false,
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"constant": true,
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_step",
+									"type": "uint256"
+								}
+							],
+							"name": "isLastStep",
+							"outputs": [
+								{
+									"internalType": "bool",
+									"name": "",
+									"type": "bool"
+								}
+							],
+							"payable": false,
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"constant": true,
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"name": "lastSteps",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"payable": false,
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"constant": false,
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_item",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256[]",
+									"name": "_precedents",
+									"type": "uint256[]"
+								}
+							],
+							"name": "newStep",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"payable": false,
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"constant": true,
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"name": "relations",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"payable": false,
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"constant": true,
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"name": "steps",
+							"outputs": [
+								{
+									"internalType": "address",
+									"name": "creator",
+									"type": "address"
+								},
+								{
+									"internalType": "uint256",
+									"name": "item",
+									"type": "uint256"
+								}
+							],
+							"payable": false,
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"constant": true,
+							"inputs": [],
+							"name": "totalSteps",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"payable": false,
+							"stateMutability": "view",
+							"type": "function"
+						}
+					];
+            const DAI_ADDRESS = "0x5B8D749c594a565EB08F159873cF926bbEb64354";
             const web3 = new Web3("http://localhost:8545");
             const daiToken = new web3.eth.Contract(ERC20TransferABI, DAI_ADDRESS);
+            const mockData = [{
+                stepNumber: 1100,
+                description: "Farm",
+                parents: []
+            }, {
+                stepNumber: 1101,
+                description: "Flour",
+                parents: [0]
+            }, {
+                stepNumber: 1102,
+                description: "Loaf",
+                parents: [1]
+            }, {
+                stepNumber: 1103,
+                description: "Loblaw Stores",
+                parents: [2]
+            }, {
+                stepNumber: 1104,
+                description: "Loblaw Stores 2",
+                parents: [2]
+            }];
             console.log(daiToken);
             daiToken.methods.totalSteps().call(function (err, res) {
                 if (err) {
@@ -179,20 +243,140 @@
                 console.log("The totalSteps is: ", res)
                 document.getElementById("totalSteps").innerHTML = res;
             }); 
+
+            daiToken.methods.getSupplyChain().call(function (err, res) {
+                if (err) {
+                    console.log("An error occured", err)
+                    return
+                }
+                console.log("The totalSteps is: ", res);
+                const chartData = res.map((item) => {
+                    const temp = [];
+                    for(var i=0; i < item.length; i++) {
+                        const stepIndex = item[i];
+                        temp.push(mockData[stepIndex].description);
+                    }
+                    return temp;
+                });
+                const tableData = [];
+                if(chartData && chartData.length > 0) {
+                    tableData.push(mockData[0]);
+                    chartData.forEach(data => {
+                        const index = mockData.findIndex(item => item.description === data[0]);
+                        if(index > -1) {
+                            tableData.push(mockData[index]);
+                        }
+                    })
+                };
+                tableData.forEach(nodeElement => {
+                    const prevNodeIndex = nodeElement.parents[0] === undefined || nodeElement.parents[0] === null ? '' : nodeElement.parents[0];
+                    const description = prevNodeIndex === '' ? '' : mockData[prevNodeIndex].description;
+                    $('#childTable').find('tbody').append('<tr>' + 
+                        '<td class="col-sm-4">' + nodeElement.stepNumber + 
+                        '</td><td>' + nodeElement.description + 
+                        '</td><td class="col-sm-2">' + description +
+                        '</td><td class="col-sm-2">' + new Date().toLocaleTimeString() + 
+                        '</td></tr>');
+                });
+                Highcharts.chart('supply-chain-chart-container', {
+                    chart: {
+                        type: 'networkgraph'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    exporting: false,
+                    subtitle: {
+                        text: ''
+                    },
+                    plotOptions: {
+                        networkgraph: {
+                            keys: ['from', 'to'],
+                            layoutAlgorithm: {
+                                enableSimulation: true,
+                                friction: -0.9
+                            }
+                        }
+                    },
+                    series: [{
+                        accessibility: {
+                            enabled: false
+                        },
+                        dataLabels: {
+                            enabled: true,
+                            linkFormat: ''
+                        },
+                        id: 'lang-tree',
+                        data: chartData
+                    }]
+                });
+            }); 
+
+           
+            function addChildrenRow(stepNumber) {
+                const nodeElement = mockData.find(item => item.stepNumber == stepNumber);
+                if(!nodeElement)
+                    return;
+                const prevNodeIndex = nodeElement.parents[0] || '';
+                const description = prevNodeIndex === '' ? '' : mockData[prevNodeIndex].description;
+                 $('#childTable').find('tbody').append('<tr>' + 
+                    '<td class="col-sm-4">' + nodeElement.stepNumber + 
+                    '</td><td>' + nodeElement.description + 
+                    '</td><td class="col-sm-2">' + description +
+                    '</td><td class="col-sm-2">' + new Date().toLocaleTimeString() + 
+                    '</td></tr>');
+            }
+            
             function addNewStep() {
                 const stepNumberElement = document.getElementById("itemId");
                 const precendents = [];
                 console.log(stepNumberElement.value);
-                const senderAddress = '0x09Dc715fA1B8382c271d7826D95202ffC8E858c8';
-                daiToken.methods.newStep(stepNumberElement.value, precendents).send({ from: senderAddress }, function (err, res) {
-                    if (err) {
-                        console.log("An error occured", err)
-                        return
-                    }
-                    console.log("The add new step: ", res)
-                    document.getElementById("totalSteps").innerHTML = res;
-                });
+                addChildrenRow(stepNumberElement.value);
+                // const senderAddress = '0x09Dc715fA1B8382c271d7826D95202ffC8E858c8';
+                // daiToken.methods.newStep(stepNumberElement.value, precendents).send({ from: senderAddress }, function (err, res) {
+                //     if (err) {
+                //         console.log("An error occured", err)
+                //         return
+                //     }
+                //     console.log("The add new step: ", res)
+                //     document.getElementById("totalSteps").innerHTML = res;
+                // });
             }  
+
+             // create charts
+            // Add the nodes option through an event call. We want to start with the parent
+            // item and apply separate colors to each child element, then the same color to
+            // grandchildren.
+            Highcharts.addEvent(
+                Highcharts.Series,
+                'afterSetOptions',
+                function (e) {
+                    var colors = Highcharts.getOptions().colors,
+                        i = 0,
+                        nodes = {};
+
+                    if (
+                        this instanceof Highcharts.Series.types.networkgraph &&
+                        e.options.id === 'lang-tree'
+                    ) {
+                        e.options.data.forEach(function (link, index) {
+                            mockData.forEach((item, index) => {
+                                nodes[item.description] = {
+                                    id: item.description,
+                                    marker: {
+                                        radius: 40
+                                    },
+                                    color: colors[index++]
+                                };
+                            })
+                        });
+
+                        e.options.nodes = Object.keys(nodes).map(function (id) {
+                            return nodes[id];
+                        });
+                    }
+                }
+            );
         </script>
     </head>
     <body id="page-top">
@@ -206,9 +390,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Demo</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#demo">Demo</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -231,13 +414,38 @@
             </div>
         </header>
         <!-- Portfolio Section-->
-        <section class="page-section portfolio" id="portfolio">
+        <section class="page-section portfolio" id="demo">
             <div class="container">
                 <!-- Portfolio Section Heading-->
                 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Demo</h2>
+                <h3>Supply Chain Graph </h3>
+                <div class="row p-1">
+                    <div class="col-lg-2">Total Nodes: </div>
+                    <div class="col-lg-10" id="totalSteps"></div>
+                </div>
+                <div class="row">
+                    <figure class="highcharts-figure">
+                        <div id="supply-chain-chart-container"></div>
+                        <p class="highcharts-description">
+                        </p>
+                    </figure>                    
+                </div>
+                <h3>Supply Chain Table</h3>
+                <table class="table table-bordered" id="childTable">
+                    <thead style="background-color: #1abc9c; border-color: #dee2e6;">
+                        <tr>
+                            <th scope="col">Item ID</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Precedents</th>
+                            <th scope="col">CreationDateTime</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
                 <div class="row">
                     <h4>Add a node in a supply chain</h4>
-                    <form onsubmit="addNewStep()">
+                    <form onsubmit="addNewStep(); return false;">
                         <div class="form-group p-1">
                           <label for="itemId">Item ID</label>
                           <input type="text" class="form-control" id="itemId" aria-describedby="itemIdHelp" placeholder="Enter Item ID">
@@ -253,49 +461,7 @@
                         <div class="form-group p-1">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
-                        <div class="row p-1">
-                            <div class="col-lg-1">Total Steps: </div>
-                            <div class="col-lg-11" id="totalSteps"></div>
-                        </div>
                     </form>
-                </div>
-
-                <table class="table table-bordered" id="childTable">
-                    <thead class="table-info">
-                      <tr>
-                        <th scope="col">Step No.</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Url</th>
-                        <th scope="col">Precedents</th>
-                        <th scope="col">CreationDateTime</th>
-                        <th scope=""></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td class="col-sm-4">
-                          <input type="text" name="descripton" class="form-control" readonly/>
-                        </td>
-                        <td>
-                          <input type="text" name="url" class="form-control" readonly/>
-                        </td>
-                        <td class="col-sm-2">
-                          <input type="text" name="precedents" class="form-control" readonly/>
-                        </td>
-                        <td class="col-sm-2">
-                          <input type="text" name="creationDateTime" class="form-control" readonly/>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                <div class="row">
-                    <figure class="highcharts-figure">
-                        <div id="supply-chain-chart-container"></div>
-                        <p class="highcharts-description">
-                        </p>
-                    </figure>                    
                 </div>
             </div>
         </section>
@@ -312,86 +478,8 @@
                 </div>
                 <!-- About Section Content-->
                 <div class="row">
-                    <div class="col-lg-4 ms-auto"><p class="lead">Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional SASS stylesheets for easy customization.</p></div>
-                    <div class="col-lg-4 me-auto"><p class="lead">You can create your own custom avatar for the masthead, change the icon in the dividers, and add your email address to the contact form to make it fully functional!</p></div>
-                </div>
-                <!-- About Section Button-->
-                <div class="text-center mt-4">
-                    <a class="btn btn-xl btn-outline-light" href="https://startbootstrap.com/theme/freelancer/">
-                        <i class="fas fa-download me-2"></i>
-                        Free Download!
-                    </a>
-                </div>
-            </div>
-        </section>
-        <!-- Contact Section-->
-        <section class="page-section" id="contact">
-            <div class="container">
-                <!-- Contact Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Me</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- Contact Section Form-->
-                <div class="row justify-content-center">
-                    <div class="col-lg-8 col-xl-7">
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- * * SB Forms Contact Form * *-->
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- This form is pre-integrated with SB Forms.-->
-                        <!-- To make this form functional, sign up at-->
-                        <!-- https://startbootstrap.com/solution/contact-forms-->
-                        <!-- to get an API token!-->
-                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                            <!-- Name input-->
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                                <label for="name">Full name</label>
-                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                            </div>
-                            <!-- Email address input-->
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                                <label for="email">Email address</label>
-                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                            </div>
-                            <!-- Phone number input-->
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
-                                <label for="phone">Phone number</label>
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
-                            </div>
-                            <!-- Message input-->
-                            <div class="form-floating mb-3">
-                                <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
-                                <label for="message">Message</label>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
-                            </div>
-                            <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted-->
-                            <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3">
-                                    <div class="fw-bolder">Form submission successful!</div>
-                                    To activate this form, sign up at
-                                    <br />
-                                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                </div>
-                            </div>
-                            <!-- Submit error message-->
-                            <!---->
-                            <!-- This is what your users will see when there is-->
-                            <!-- an error submitting the form-->
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                            <!-- Submit Button-->
-                            <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Send</button>
-                        </form>
-                    </div>
+                    <div class="col-lg-4 ms-auto"><p class="lead">Web3 is the next evolution of the internet. It builds off current Web 2.0 with added functionality. Whereas Web 2.0s is focused on read-write, Web3 is read-write-own or read-write-execute. Decentralization, privacy, security and machine learning are early principles of Web3.</p></div>
+                    <div class="col-lg-4 me-auto"><p class="lead">A decentralized application (dApp) is a type of distributed open source software application that runs on a peer-to-peer (P2P) blockchain network rather than on a single computer. DApps are visibly similar to other software applications that are supported on a website or mobile device but are P2P supported</p></div>
                 </div>
             </div>
         </section>
@@ -403,14 +491,14 @@
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <h4 class="text-uppercase mb-4">Location</h4>
                         <p class="lead mb-0">
-                            2215 John Daniel Drive
+                            Team 1 - Briochee Loaf
                             <br />
-                            Clark, MO 65243
+                            Loblaw Digital, Toronto, Canada
                         </p>
                     </div>
                     <!-- Footer Social Icons-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Around the Web</h4>
+                        <h4 class="text-uppercase mb-4">Around the Web3</h4>
                         <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
                         <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
                         <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
@@ -418,10 +506,10 @@
                     </div>
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
-                        <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                        <h4 class="text-uppercase mb-4">About Us</h4>
                         <p class="lead mb-0">
-                            Freelance is a free to use, MIT licensed Bootstrap theme created by
-                            <a href="http://startbootstrap.com">Start Bootstrap</a>
+                            It is a free to use, MIT licensed Bootstrap theme created by
+                            <a href="">Loblaw Digital Hackathon Web3 Team-1</a>
                             .
                         </p>
                     </div>
@@ -635,94 +723,7 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
         <script>
-             // create charts
-            // Add the nodes option through an event call. We want to start with the parent
-            // item and apply separate colors to each child element, then the same color to
-            // grandchildren.
-            Highcharts.addEvent(
-                Highcharts.Series,
-                'afterSetOptions',
-                function (e) {
-                    var colors = Highcharts.getOptions().colors,
-                        i = 0,
-                        nodes = {};
-
-                    if (
-                        this instanceof Highcharts.Series.types.networkgraph &&
-                        e.options.id === 'lang-tree'
-                    ) {
-                        e.options.data.forEach(function (link) {
-
-                            if (link[0] === 'Loblaw') {
-                                nodes['Loblaw'] = {
-                                    id: 'Loblaw',
-                                    marker: {
-                                        radius: 20
-                                    }
-                                };
-                                nodes[link[1]] = {
-                                    id: link[1],
-                                    marker: {
-                                        radius: 10
-                                    },
-                                    color: colors[i++]
-                                };
-                            } else if (nodes[link[0]] && nodes[link[0]].color) {
-                                nodes[link[1]] = {
-                                    id: link[1],
-                                    color: nodes[link[0]].color
-                                };
-                            }
-                        });
-
-                        e.options.nodes = Object.keys(nodes).map(function (id) {
-                            return nodes[id];
-                        });
-                    }
-                }
-            );
-
-            Highcharts.chart('supply-chain-chart-container', {
-                chart: {
-                    type: 'networkgraph',
-                    height: '100%'
-                },
-                title: {
-                    text: 'The Supply Chain Graph'
-                },
-                subtitle: {
-                    text: 'A Force-Directed Network Graph in Highcharts'
-                },
-                plotOptions: {
-                    networkgraph: {
-                        keys: ['from', 'to'],
-                        layoutAlgorithm: {
-                            enableSimulation: true,
-                            friction: -0.9
-                        }
-                    }
-                },
-                series: [{
-                    accessibility: {
-                        enabled: false
-                    },
-                    dataLabels: {
-                        enabled: true,
-                        linkFormat: ''
-                    },
-                    id: 'lang-tree',
-                    data: [
-                        ['Loblaw', 'supplier1'],
-                        ['Loblaw', 'supplier2'],
-                        ['Loblaw', 'supplier3'],
-                        ['Loblaw', 'supplier4'],
-                        ['supplier1', 'sub-1-1'],
-                        ['supplier1', 'sub-1-2'],
-                        ['supplier2', 'sub-2-1'],
-                        ['supplier2', 'sub-2-2'],
-                    ]
-                }]
-            });
+            
         </script>
     </body>
 </html>
