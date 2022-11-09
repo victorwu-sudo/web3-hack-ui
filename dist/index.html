@@ -24,216 +24,233 @@
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
         <script>
-            const ERC20TransferABI = [
-						{
-							"anonymous": false,
-							"inputs": [
-								{
-									"indexed": false,
-									"internalType": "uint256",
-									"name": "step",
-									"type": "uint256"
-								}
-							],
-							"name": "StepCreated",
-							"type": "event"
-						},
-						{
-							"constant": true,
-							"inputs": [],
-							"name": "getSupplyChain",
-							"outputs": [
-								{
-									"internalType": "uint256[2][]",
-									"name": "",
-									"type": "uint256[2][]"
-								}
-							],
-							"payable": false,
-							"stateMutability": "view",
-							"type": "function"
-						},
-						{
-							"constant": true,
-							"inputs": [
-								{
-									"internalType": "uint256",
-									"name": "_step",
-									"type": "uint256"
-								}
-							],
-							"name": "getprecedents",
-							"outputs": [
-								{
-									"internalType": "uint256[]",
-									"name": "",
-									"type": "uint256[]"
-								}
-							],
-							"payable": false,
-							"stateMutability": "view",
-							"type": "function"
-						},
-						{
-							"constant": true,
-							"inputs": [
-								{
-									"internalType": "uint256",
-									"name": "_step",
-									"type": "uint256"
-								}
-							],
-							"name": "isLastStep",
-							"outputs": [
-								{
-									"internalType": "bool",
-									"name": "",
-									"type": "bool"
-								}
-							],
-							"payable": false,
-							"stateMutability": "view",
-							"type": "function"
-						},
-						{
-							"constant": true,
-							"inputs": [
-								{
-									"internalType": "uint256",
-									"name": "",
-									"type": "uint256"
-								}
-							],
-							"name": "lastSteps",
-							"outputs": [
-								{
-									"internalType": "uint256",
-									"name": "",
-									"type": "uint256"
-								}
-							],
-							"payable": false,
-							"stateMutability": "view",
-							"type": "function"
-						},
-						{
-							"constant": false,
-							"inputs": [
-								{
-									"internalType": "uint256",
-									"name": "_item",
-									"type": "uint256"
-								},
-								{
-									"internalType": "uint256[]",
-									"name": "_precedents",
-									"type": "uint256[]"
-								}
-							],
-							"name": "newStep",
-							"outputs": [
-								{
-									"internalType": "uint256",
-									"name": "",
-									"type": "uint256"
-								}
-							],
-							"payable": false,
-							"stateMutability": "nonpayable",
-							"type": "function"
-						},
-						{
-							"constant": true,
-							"inputs": [
-								{
-									"internalType": "uint256",
-									"name": "",
-									"type": "uint256"
-								},
-								{
-									"internalType": "uint256",
-									"name": "",
-									"type": "uint256"
-								}
-							],
-							"name": "relations",
-							"outputs": [
-								{
-									"internalType": "uint256",
-									"name": "",
-									"type": "uint256"
-								}
-							],
-							"payable": false,
-							"stateMutability": "view",
-							"type": "function"
-						},
-						{
-							"constant": true,
-							"inputs": [
-								{
-									"internalType": "uint256",
-									"name": "",
-									"type": "uint256"
-								}
-							],
-							"name": "steps",
-							"outputs": [
-								{
-									"internalType": "address",
-									"name": "creator",
-									"type": "address"
-								},
-								{
-									"internalType": "uint256",
-									"name": "item",
-									"type": "uint256"
-								}
-							],
-							"payable": false,
-							"stateMutability": "view",
-							"type": "function"
-						},
-						{
-							"constant": true,
-							"inputs": [],
-							"name": "totalSteps",
-							"outputs": [
-								{
-									"internalType": "uint256",
-									"name": "",
-									"type": "uint256"
-								}
-							],
-							"payable": false,
-							"stateMutability": "view",
-							"type": "function"
-						}
-					];
-            const DAI_ADDRESS = "0x5B8D749c594a565EB08F159873cF926bbEb64354";
+            const ERC20TransferABI = [{
+                    "anonymous": false,
+                    "inputs": [
+                        {
+                            "indexed": false,
+                            "internalType": "uint256",
+                            "name": "step",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "StepCreated",
+                    "type": "event"
+                },
+                {
+                    "constant": true,
+                    "inputs": [],
+                    "name": "getSupplyChain",
+                    "outputs": [
+                        {
+                            "internalType": "uint256[2][]",
+                            "name": "",
+                            "type": "uint256[2][]"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "constant": true,
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_step",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "getprecedents",
+                    "outputs": [
+                        {
+                            "internalType": "uint256[]",
+                            "name": "",
+                            "type": "uint256[]"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "constant": true,
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_step",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "isLastStep",
+                    "outputs": [
+                        {
+                            "internalType": "bool",
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "constant": true,
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "lastSteps",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "constant": false,
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "_item",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256[]",
+                            "name": "_precedents",
+                            "type": "uint256[]"
+                        }
+                    ],
+                    "name": "newStep",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "constant": true,
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "relations",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "constant": true,
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "steps",
+                    "outputs": [
+                        {
+                            "internalType": "address",
+                            "name": "creator",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "item",
+                            "type": "uint256"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "constant": true,
+                    "inputs": [],
+                    "name": "totalSteps",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                }
+            ];
+            const DAI_ADDRESS = "0x5491a8be1DC7d77Dd6214c507100E429e3A75190";
             const web3 = new Web3("http://localhost:8545");
             const daiToken = new web3.eth.Contract(ERC20TransferABI, DAI_ADDRESS);
+
             const mockData = [{
-                stepNumber: 1100,
-                description: "Farm",
+                stepNumber: 20001,
+                description: "Step 0 - Farm",
                 parents: []
             }, {
-                stepNumber: 1101,
-                description: "Flour",
+                stepNumber: 20002,
+                description: "Step 4 - Sugar Factory",
+                parents: []
+            }, {
+                stepNumber: 30001,
+                description: "Step 1 - Egg",
                 parents: [0]
             }, {
-                stepNumber: 1102,
-                description: "Loaf",
+                stepNumber: 30002,
+                description: "Step 2 - Wheat",
+                parents: [0]
+            }, {
+                stepNumber: 30003,
+                description: "Step 3 - Flour",
+                parents: [3]
+            }, {
+                stepNumber: 30004,
+                description: "Step 5 - Sugar",
                 parents: [1]
             }, {
-                stepNumber: 1103,
-                description: "Loblaw Stores",
-                parents: [2]
+                stepNumber: 10001,
+                description: "Step 6 - Brioche Loaf",
+                parents: [2, 4, 5]
             }, {
-                stepNumber: 1104,
-                description: "Loblaw Stores 2",
-                parents: [2]
+                stepNumber: 10002,
+                description: "Step 7 - Loblaw Zehres Location",
+                parents: [6]
+            }, {
+                stepNumber: 10003,
+                description: "Step 8 - Loblaw Toronto Location",
+                parents: [6]
             }];
+
             console.log(daiToken);
             daiToken.methods.totalSteps().call(function (err, res) {
                 if (err) {
@@ -245,6 +262,7 @@
             }); 
 
             daiToken.methods.getSupplyChain().call(function (err, res) {
+                debugger;
                 if (err) {
                     console.log("An error occured", err)
                     return
@@ -258,26 +276,7 @@
                     }
                     return temp;
                 });
-                const tableData = [];
-                if(chartData && chartData.length > 0) {
-                    tableData.push(mockData[0]);
-                    chartData.forEach(data => {
-                        const index = mockData.findIndex(item => item.description === data[0]);
-                        if(index > -1) {
-                            tableData.push(mockData[index]);
-                        }
-                    })
-                };
-                tableData.forEach(nodeElement => {
-                    const prevNodeIndex = nodeElement.parents[0] === undefined || nodeElement.parents[0] === null ? '' : nodeElement.parents[0];
-                    const description = prevNodeIndex === '' ? '' : mockData[prevNodeIndex].description;
-                    $('#childTable').find('tbody').append('<tr>' + 
-                        '<td class="col-sm-4">' + nodeElement.stepNumber + 
-                        '</td><td>' + nodeElement.description + 
-                        '</td><td class="col-sm-2">' + description +
-                        '</td><td class="col-sm-2">' + new Date().toLocaleTimeString() + 
-                        '</td></tr>');
-                });
+
                 Highcharts.chart('supply-chain-chart-container', {
                     chart: {
                         type: 'networkgraph'
@@ -293,7 +292,7 @@
                         networkgraph: {
                             keys: ['from', 'to'],
                             layoutAlgorithm: {
-                                enableSimulation: true,
+                                enableSimulation: false,
                                 friction: -0.9
                             }
                         }
@@ -310,10 +309,49 @@
                         data: chartData
                     }]
                 });
+
+                const tableData = [];
+                if(chartData && chartData.length > 0) {
+                    tableData.push(mockData[0]);
+                    tableData.push(mockData[1]);
+                    chartData.forEach(data => {
+                        const index = mockData.findIndex(item => item.description === data[0]);
+                        const hasNotAddedInTable = tableData.findIndex(item => mockData[index].description === item.description) === -1;
+                        if(index > -1 && hasNotAddedInTable){
+                            tableData.push(mockData[index]);
+                        }
+                    })
+                };
+
+                tableData.forEach(nodeElement => {
+                    const prevNodeIndexs = nodeElement.parents[0] === undefined || nodeElement.parents[0] === null ? '' : nodeElement.parents;
+                    let description = '';
+                    if(prevNodeIndexs !== '') {
+                        let descriptionAry = [];
+                        prevNodeIndexs.forEach(indexNum => {
+                            descriptionAry.push(mockData[indexNum].description);
+                        });
+                        description = descriptionAry.join(" , ");
+                    }
+                    $('#childTable').find('tbody').append('<tr>' + 
+                        '<td class="col-sm-4">' + nodeElement.stepNumber + 
+                        '</td><td>' + nodeElement.description + 
+                        '</td><td class="col-sm-2">' + description +
+                        '</td><td class="col-sm-2">' + randomDate(new Date(2022, 0, 1), new Date()).toLocaleDateString() + 
+                        '</td></tr>');
+                });
             }); 
 
+            function randomDate(start, end) {
+                return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+            }
            
             function addChildrenRow(stepNumber) {
+                mockData.push({
+                    stepNumber: 10004,
+                    description: "Loblaw Toronto Location 2",
+                    parents: [6]
+                });
                 const nodeElement = mockData.find(item => item.stepNumber == stepNumber);
                 if(!nodeElement)
                     return;
@@ -323,7 +361,7 @@
                     '<td class="col-sm-4">' + nodeElement.stepNumber + 
                     '</td><td>' + nodeElement.description + 
                     '</td><td class="col-sm-2">' + description +
-                    '</td><td class="col-sm-2">' + new Date().toLocaleTimeString() + 
+                    '</td><td class="col-sm-2">' + new Date().toLocaleDateString() + 
                     '</td></tr>');
             }
             
@@ -420,7 +458,7 @@
                 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Demo</h2>
                 <h3>Supply Chain Graph </h3>
                 <div class="row p-1">
-                    <div class="col-lg-2">Total Nodes: </div>
+                    <div class="col-lg-2">Total Steps: </div>
                     <div class="col-lg-10" id="totalSteps"></div>
                 </div>
                 <div class="row">
@@ -437,14 +475,14 @@
                             <th scope="col">Item ID</th>
                             <th scope="col">Description</th>
                             <th scope="col">Precedents</th>
-                            <th scope="col">CreationDateTime</th>
+                            <th scope="col">CreationDate</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
                 <div class="row">
-                    <h4>Add a node in a supply chain</h4>
+                    <h4>Add a new step in a supply chain</h4>
                     <form onsubmit="addNewStep(); return false;">
                         <div class="form-group p-1">
                           <label for="itemId">Item ID</label>
